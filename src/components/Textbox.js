@@ -45,6 +45,41 @@ export default function Textbox(props) {
   }
 
 
+  function toSentenceCase(str){
+    return str.toLowerCase().charAt(0).toUpperCase() + str.slice(1);
+  }
+  const handleSentenceCase = () => {
+    // first we lower case the words then after (dot). we capitalize first chartacter of first word
+    let lower_case, temp, output_str;
+
+    lower_case = text.toLowerCase()
+    // console.log(`Lower Case: ${lower_case}`); 
+    temp = lower_case.split(". ")
+    // console.log("Splitted by dot: ", temp, "Type: ", typeof(temp))
+
+    for(let i = 0; i < temp.length; i++) {
+      // console.log(temp[i]);
+      temp[i] = toSentenceCase(temp[i])
+    }
+    output_str = temp.join(". ")
+    setText(output_str)
+    // console.log(output_str);
+  }
+
+  const handleTitleCase = () => {
+    let temp, output_str;
+    temp = text.split(" ")
+    for (let i = 0; i < temp.length; i++)
+    {
+        temp[i] = temp[i].charAt(0).toUpperCase() + temp[i].slice(1).toLowerCase()
+        // console.log(temp[i])  
+    }
+    output_str = temp.join(" ")
+    // console.log("Final Output:", output_str);
+    setText(output_str)
+  }
+
+
   const [text, setText] = useState("")
   // we have "Enter Text (STATE)" in our variable text, that can be updated using function of setText
   // text has current state as "Enter Text (STATE)" || will be changed by using function setText
@@ -54,11 +89,14 @@ export default function Textbox(props) {
       <div className="mb-3">
         <textarea className="form-control" value={text} onChange={handleOnClick} id="textBox" rows="9"></textarea>
       </div>
-      <div className="d-flex flex-nowrap gap-3">
-        <button className="btn btn-primary" onClick={handleUpperCase}>Convert to UpperCase</button>
-        <button className="btn btn-primary" onClick={handleLowerCase}>Convert to LowerCase</button>
-        <button className="btn btn-danger" onClick={clearText}>Clear Text</button>
+      <div className="d-flex flex-wrap">
+        <button className="btn btn-primary mx-2 my-2" onClick={handleUpperCase}>Convert to UpperCase</button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleLowerCase}>Convert to LowerCase</button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleTitleCase}>Title Case</button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleSentenceCase}>Sentence Case</button>
+        <button className="btn btn-danger mx-2 my-2" onClick={clearText}>Clear Text</button>
       </div>
+
       <div className="container my-4">
         <h2>Text Summary</h2>
         <p>{word_count()} Words, {text.length} Characters</p>
