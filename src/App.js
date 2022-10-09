@@ -1,4 +1,5 @@
 import "./App.css";
+// import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Textbox from "./components/Textbox";
 // APP name - Textutils
@@ -11,7 +12,7 @@ function App() {
       <div className="container">
         <Textbox heading="Enter your text to analyze below:"/>
       </div>
-      
+      {/* <About/> */}
     </>
   );
 }
