@@ -10,19 +10,20 @@ export default function Textbox(props) {
     capitalized_text = text.toUpperCase()
     if (capitalized_text === text) 
     {
-      alert("Text is Already in UpperCase Notation!")
+      // alert("Text is Already in UpperCase Notation!")
     }
     setText(capitalized_text)
-
+    props.set_alert("Converted to Upper Case", "success")
   }
   const handleLowerCase = () => {
     let lowerCase_text;
     lowerCase_text = text.toLowerCase()
     if (text === lowerCase_text)
     {
-      alert("Text is Already in LowerCase Notation!")
+      // alert("Text is Already in LowerCase Notation!")
     }
     setText(lowerCase_text)
+    props.set_alert("Converted to Lower Case", "success")
   }
 
   const handleOnClick = (event) => {
@@ -31,9 +32,10 @@ export default function Textbox(props) {
   }
   const clearText = () => {
     if (text === "") {
-      alert("Nothing to Clear!")
+      // alert("Nothing to Clear!")
     }
     setText("")
+    props.set_alert("Text Cleared", "success")
   }
 
   const word_count = () => {
@@ -64,6 +66,7 @@ export default function Textbox(props) {
     output_str = temp.join(". ")
     setText(output_str)
     // console.log(output_str);
+    props.set_alert("Converted to Sentence Case", "success")
   }
 
   const handleTitleCase = () => {
@@ -77,34 +80,55 @@ export default function Textbox(props) {
     output_str = temp.join(" ")
     // console.log("Final Output:", output_str);
     setText(output_str)
+    props.set_alert("Converted to Title Case", "success")
+  }
+  const copyToClipboard = () => {
+    let text_box = document.getElementById("textBox")
+    text_box.select()
+    navigator.clipboard.writeText(text_box.value)
+    // alert_div.innerHTML = [
+    //   `<div class="alert alert-success alert-dismissible" role="alert">`,
+    //   `   <div>Success: Text Copied to Clipboard!</div>`,
+    //   '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    //   '</div>'
+    // ].join('')
+    props.set_alert("Copied to Clipboard", "success")
   }
 
+  const handleExtraSpaces = () => {
+    let tempText = text.split(/[ ]+/) //using regix to say that evalute the empty spcaes btw text, split them and then join them on single spaces
+    setText(tempText.join(' '))
+    props.set_alert("Extra Spaces Removed", "success")
+  }
 
   const [text, setText] = useState("")
   // we have "Enter Text (STATE)" in our variable text, that can be updated using function of setText
   // text has current state as "Enter Text (STATE)" || will be changed by using function setText
   return (
     <div>
-      <h1 className='my-3'>{props.heading}</h1>
+      <h1 className='my-3' style={{color: props.mode === 'dark' ? 'white' : 'black'}}>{props.heading}</h1>
+      {/* <div id='alert'></div>   */}
       <div className="mb-3">
-        <textarea className="form-control" value={text} onChange={handleOnClick} id="textBox" rows="9"></textarea>
+        <textarea style={{backgroundColor: props.mode === 'dark' ? 'black' : 'white', color: props.mode === 'dark' ? 'white' : 'black'}} className="form-control" value={text} onChange={handleOnClick} id="textBox" rows="9"></textarea>
       </div>
       <div className="d-flex flex-wrap">
         <button className="btn btn-primary mx-2 my-2" onClick={handleUpperCase}>Convert to UpperCase</button>
         <button className="btn btn-primary mx-2 my-2" onClick={handleLowerCase}>Convert to LowerCase</button>
         <button className="btn btn-primary mx-2 my-2" onClick={handleTitleCase}>Title Case</button>
         <button className="btn btn-primary mx-2 my-2" onClick={handleSentenceCase}>Sentence Case</button>
+        <button className="btn btn-warning mx-2 my-2" onClick={copyToClipboard}>Copy Text</button>
+        <button className="btn btn-warning mx-2 my-2" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
         <button className="btn btn-danger mx-2 my-2" onClick={clearText}>Clear Text</button>
       </div>
 
-      <div className="container my-4">
+      <div className="container my-4" style={{color: props.mode === 'dark' ? 'white' : 'black'}}>
         <h2>Text Summary</h2>
         <p>{word_count()} Words, {text.length} Characters</p>
         <p>{0.008 * word_count()} Minutes to Read</p>
       </div>
-      <div className="container my-4">
+      <div className="container my-4" style={{color: props.mode === 'dark' ? 'white' : 'black'}}>
         <h2>Text Preview</h2>
-        <p>{text}</p>
+        <p>{text.length === 0 ? 'Please Enter Text to Preview it here' : text}</p>
       </div>
     </div>
   )
