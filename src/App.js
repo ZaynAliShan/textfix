@@ -95,3 +95,9 @@ export default App;
 
 // now we implementing dark mode by usage of useState
 // we give state as dark mode or light mode to our components in App.js
+
+
+// git remote remove origin
+// git remote -v
+// git remote add origin <url>
+// git push --set-upstream origin master
