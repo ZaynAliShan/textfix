@@ -68,7 +68,7 @@ function App() {
           {/* <Route exact path="/" element = 
           {  */}
               <div className="container"> 
-                <Textbox set_alert={set_alert} heading="Enter your text to analyze below:" mode={mode}/>
+                <Textbox set_alert={set_alert} heading="Try TextUtils - Word and Character Counter, Remove Extra Spaces, Sentence Case, Title Case, UpperCase, LowerCase, Print Text" mode={mode}/>
               </div>
           {/* }/> */}
           {/* <Route exact path="/about" element=
