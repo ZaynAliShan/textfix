@@ -27,7 +27,7 @@ function App() {
     }) // we call send this function as a prop in where ever we want alert
     setTimeout(() => {
       setAlert(null)
-    }, 1400);
+    }, 1500);
   }
 
   const toggleMode = () => {
