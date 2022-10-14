@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/textfix/static/css/main.abd64e84.css",
+    "main.js": "/textfix/static/js/main.090976d2.js",
+    "static/js/787.28cb0dcd.chunk.js": "/textfix/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/textfix/index.html",
+    "main.abd64e84.css.map": "/textfix/static/css/main.abd64e84.css.map",
+    "main.090976d2.js.map": "/textfix/static/js/main.090976d2.js.map",
+    "787.28cb0dcd.chunk.js.map": "/textfix/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abd64e84.css",
+    "static/js/main.090976d2.js"
+  ]
+}
