@@ -4,14 +4,13 @@ import Alert from "./components/Alert";
 // import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Textbox from "./components/Textbox";
-import About from "./components/About";
 
 // import {
 //   BrowserRouter as Router,
 //   Switch,
 //   Route,
 // } from "react-router-dom";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 // APP name - Textutils
 // We will implement functionality of manipulating text (capitalizing, word cound, remove space etc etc)
@@ -28,7 +27,7 @@ function App() {
     }) // we call send this function as a prop in where ever we want alert
     setTimeout(() => {
       setAlert(null)
-    }, 2000);
+    }, 1400);
   }
 
   const toggleMode = () => {
@@ -62,22 +61,22 @@ function App() {
         </div>
       </Router> */}
 
-      <Router>
+      {/* <Router> */}
         <Navbar title="TextUtils" about="About-TextUtils" mode={mode} toggleMode = {toggleMode}/>
         <Alert alert={alert}/>
-        <Routes>
-          <Route exact path="/" element = 
-          { 
+        {/* <Routes> */}
+          {/* <Route exact path="/" element = 
+          {  */}
               <div className="container"> 
                 <Textbox set_alert={set_alert} heading="Enter your text to analyze below:" mode={mode}/>
               </div>
-          }/>
-          <Route exact path="/about" element=
+          {/* }/> */}
+          {/* <Route exact path="/about" element=
           {
             <About mode={mode}/>
-          }/>
-        </Routes>
-    </Router>
+          }/> */}
+        {/* </Routes> */}
+    {/* </Router> */}
     </>
   );
 }
