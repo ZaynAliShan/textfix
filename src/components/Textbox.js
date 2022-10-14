@@ -10,20 +10,26 @@ export default function Textbox(props) {
     capitalized_text = text.toUpperCase()
     if (capitalized_text === text) 
     {
-      // alert("Text is Already in UpperCase Notation!")
+      props.set_alert("Already in Upper Case!", "danger")
     }
-    setText(capitalized_text)
-    props.set_alert("Converted to Upper Case", "success")
+    else if (capitalized_text !== text)
+    {
+      setText(capitalized_text)
+      props.set_alert("Converted to Upper Case", "success")
+    }
   }
   const handleLowerCase = () => {
     let lowerCase_text;
     lowerCase_text = text.toLowerCase()
     if (text === lowerCase_text)
     {
-      // alert("Text is Already in LowerCase Notation!")
+      props.set_alert("Already in Lower Case!", "danger")
     }
-    setText(lowerCase_text)
-    props.set_alert("Converted to Lower Case", "success")
+    else if (lowerCase_text !== text)
+    {
+      setText(lowerCase_text)
+      props.set_alert("Converted to Lower Case", "success")
+    }   
   }
 
   const handleOnClick = (event) => {
@@ -40,7 +46,7 @@ export default function Textbox(props) {
 
   const word_count = () => {
     let words, wordsArr, word_count;
-    words = text.split(" "); // spliting the string upon spaces like before
+    words = text.split(/\s+/); // spliting the string upon spaces like before
     wordsArr = Array.from(words) // converting that string to Array
     word_count = wordsArr.filter(word => word !== "").length; // Filtering the Array (empty excluded) -- not getting count of empty words
     return word_count;
@@ -64,9 +70,15 @@ export default function Textbox(props) {
       temp[i] = toSentenceCase(temp[i])
     }
     output_str = temp.join(". ")
-    setText(output_str)
-    // console.log(output_str);
-    props.set_alert("Converted to Sentence Case", "success")
+    if (text === output_str) 
+    {
+      props.set_alert("Already in Sentence Case!", "danger")
+    }
+    else 
+    {
+      setText(output_str)
+      props.set_alert("Converted to Sentence Case", "success")
+    }
   }
 
   const handleTitleCase = () => {
@@ -79,13 +91,21 @@ export default function Textbox(props) {
     }
     output_str = temp.join(" ")
     // console.log("Final Output:", output_str);
-    setText(output_str)
-    props.set_alert("Converted to Title Case", "success")
+    if (text === output_str) 
+    {
+      props.set_alert("Already in Title Case!", "danger")
+    }
+    else 
+    {
+      setText(output_str)
+      props.set_alert("Converted to Title Case", "success")
+    }
   }
   const copyToClipboard = () => {
     let text_box = document.getElementById("textBox")
     text_box.select()
     navigator.clipboard.writeText(text_box.value)
+    document.getSelection().removeAllRanges()
     // alert_div.innerHTML = [
     //   `<div class="alert alert-success alert-dismissible" role="alert">`,
     //   `   <div>Success: Text Copied to Clipboard!</div>`,
@@ -96,9 +116,44 @@ export default function Textbox(props) {
   }
 
   const handleExtraSpaces = () => {
-    let tempText = text.split(/[ ]+/) //using regix to say that evalute the empty spcaes btw text, split them and then join them on single spaces
-    setText(tempText.join(' '))
-    props.set_alert("Extra Spaces Removed", "success")
+    let one_space_split;
+    let no_extra_spaces = false;
+    one_space_split = text.split(" ");
+    // console.log('After Splitting on one Space', one_space_split);
+    let tempText = text.split(/[\s ]+/) //using regix to say that evalute the empty spcaes btw text, split them and then join them on single spaces
+    // console.log("After Spliting Multiple Spaces", tempText);
+    console.log(one_space_split,tempText);
+    for (let i = 0; i < one_space_split.length; i++)
+    {
+      if (one_space_split[i] === tempText[i])
+      {
+        no_extra_spaces = true
+      }
+      else
+      {
+        no_extra_spaces = false
+      }
+    }
+    if (no_extra_spaces === true)
+    {
+      console.log("No Extra Spaces!");
+      props.set_alert("No Extra Spaces!", "danger")
+    }
+    else if (no_extra_spaces === false)
+    {
+      setText(tempText.join(' '))
+      props.set_alert("Extra Spaces Removed", "success")
+    }
+
+  }
+
+  const printText = () => 
+  {
+    let textToPrint = document.getElementById("preview_lines").innerText;
+    let win = window.open('', '', 'height=1200px, width=1200px');
+    win.document.write(textToPrint);
+    win.document.close();
+    win.print();
   }
 
   const [text, setText] = useState("")
