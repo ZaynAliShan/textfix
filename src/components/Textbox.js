@@ -161,19 +161,20 @@ export default function Textbox(props) {
   // text has current state as "Enter Text (STATE)" || will be changed by using function setText
   return (
     <div>
-      <h1 className='my-3' style={{color: props.mode === 'dark' ? 'white' : 'black'}}>{props.heading}</h1>
+      <h1 className='my-3 mb-4' style={{color: props.mode === 'dark' ? 'white' : 'black'}}>{props.heading}</h1>
       {/* <div id='alert'></div>   */}
-      <div className="mb-3">
+      <div className="mb-4">
         <textarea style={{backgroundColor: props.mode === 'dark' ? 'black' : 'white', color: props.mode === 'dark' ? 'white' : 'black'}} className="form-control" value={text} onChange={handleOnClick} id="textBox" rows="9"></textarea>
       </div>
       <div className="d-flex flex-wrap">
-        <button className="btn btn-primary mx-2 my-2" onClick={handleUpperCase}>Convert to UpperCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleLowerCase}>Convert to LowerCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleTitleCase}>Title Case</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleSentenceCase}>Sentence Case</button>
-        <button className="btn btn-warning mx-2 my-2" onClick={copyToClipboard}>Copy Text</button>
-        <button className="btn btn-warning mx-2 my-2" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-        <button className="btn btn-danger mx-2 my-2" onClick={clearText}>Clear Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1 css-btn" onClick={handleUpperCase}>Convert to UpperCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLowerCase}>Convert to LowerCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleTitleCase}>Title Case</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleSentenceCase}>Sentence Case</button>
+        <button disabled={text.length===0} className="btn btn-warning mx-1 my-1" onClick={copyToClipboard}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-warning mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+        <button disabled={text.length===0} className="btn btn-danger mx-1 my-1" onClick={clearText} >Clear Text</button>
+        <button disabled={text.length===0} className="btn btn-success mx-1 my-1" onClick={printText} >Print Text</button>
       </div>
 
       <div className="container my-4" style={{color: props.mode === 'dark' ? 'white' : 'black'}}>
@@ -183,7 +184,7 @@ export default function Textbox(props) {
       </div>
       <div className="container my-4" style={{color: props.mode === 'dark' ? 'white' : 'black'}}>
         <h2>Text Preview</h2>
-        <p>{text.length === 0 ? 'Please Enter Text to Preview it here' : text}</p>
+        <p id='preview_lines'>{text.length === 0 ? 'No Preview' : text}</p>
       </div>
     </div>
   )
